@@ -1,154 +1,205 @@
 # enterprise-kpi-monitoring-
-A production-style Enterprise KPI Monitoring Platform that detects abnormal behavior in operational business metrics, attributes root causes, and generates alerts for investigation.
+# Enterprise KPI Monitoring Platform
 
-The system simulates how analytics and platform teams monitor critical KPIs such as revenue, order volume, and payment failures.
-Key Features
-• Automated KPI monitoring pipeline • Multi-model anomaly detection (Z-Score, IQR, Isolation Forest) • Root cause attribution across business dimensions • Risk severity classification for incidents • Operational alert orchestration system • Power BI monitoring console for investigation
+A production-style Enterprise KPI Monitoring Platform designed to detect abnormal behavior in operational business metrics, identify root causes, classify incident severity, and generate alerts for investigation.
 
-Why This Project Exists
-Organizations monitor operational KPIs to quickly detect incidents that impact customers or revenue.
+This project simulates how enterprise analytics and platform teams monitor critical KPIs such as revenue, order volume, payment failures, and other operational risks in real time.
 
-Examples of operational incidents include:
+---
 
-• payment system failures • infrastructure outages • unexpected demand spikes • fraud or transaction anomalies
+## Key Features
 
-This project simulates how a modern analytics platform automatically detects these incidents and alerts operators.
-Monitoring Console
-The Enterprise KPI Monitoring Console provides a centralized operational view of business health.
+- Automated KPI monitoring pipeline
+- Multi-model anomaly detection (Z-Score, IQR, Isolation Forest)
+- Root cause attribution across business dimensions
+- Incident severity classification (LOW / MEDIUM / HIGH)
+- Operational alert orchestration system
+- Power BI dashboard for monitoring and investigation
 
-The dashboard includes three monitoring layers.
+---
 
-Executive KPI Monitoring
-• revenue trends • order volume trends • anomaly indicators • total alert summaries
+## Project Overview
 
-Operational Risk Monitoring
-• incident severity distribution • alert frequency over time • anomaly distribution across KPIs.
-System Architecture
-Raw Transaction Data
-        │
-        ▼
-Feature Engineering
-        │
-        ▼
-Daily KPI Aggregation
-        │
-        ▼
-Anomaly Detection Layer
-(Z-Score | IQR | Isolation Forest)
-        │
-        ▼
-Risk Classification
-        │
-        ▼
-Root Cause Attribution
-        │
-        ▼
-Alert Orchestration Layer
-        │
-        ▼
-Enterprise KPI Monitoring Console
-The architecture mirrors how real data teams build monitoring systems for operational analytics.
-Platform Components
-Data Processing Layer
+Organizations rely on KPI monitoring systems to quickly detect and respond to operational incidents that impact customers, revenue, or system performance.
+
+Typical incidents include:
+- Payment system failures
+- Infrastructure outages
+- Fraud or transaction anomalies
+- Unexpected demand spikes
+
+This project simulates a real-world analytics platform that automatically detects these issues and generates alerts for investigation.
+
+---
+
+## Monitoring Console
+
+### Executive KPI Monitoring
+- Revenue trends
+- Order volume trends
+- KPI anomaly indicators
+- Alert summaries
+
+### Operational Risk Monitoring
+- Incident severity distribution
+- Alert frequency over time
+- KPI anomaly distribution
+
+### Investigation Console
+- Incident logs
+- Severity indicators
+- Root cause signals
+- KPI breakdown analysis
+
+---
+
+## System Architecture
+
+Raw Transaction Data  
+→ Feature Engineering  
+→ Daily KPI Aggregation  
+→ Anomaly Detection (Z-Score | IQR | Isolation Forest)  
+→ Risk Classification  
+→ Root Cause Attribution  
+→ Alert Orchestration Layer  
+→ Monitoring Dashboard (Power BI)
+
+---
+
+## Platform Components
+
+### Data Processing Layer
 Transforms transaction-level data into daily KPI metrics.
 
-Monitored KPIs
+Monitored KPIs:
+- Revenue
+- Orders
+- Payment Failure Rate
+- Average Order Value
 
-• Revenue • Orders • Payment failure rate • Average order value
+Database: DuckDB
 
-Warehouse: DuckDB
-Anomaly Detection Layer
-Multiple anomaly detection methods run in parallel.
+---
 
-Z-Score Detector
-Detects statistical deviations from historical baseline behavior.
+### Anomaly Detection Layer
 
-IQR Detector
-Identifies distribution outliers using interquartile ranges.
+- Z-Score: detects statistical deviations from baseline behavior
+- IQR: identifies distribution outliers
+- Isolation Forest: detects rare and unusual patterns using machine learning
 
-Isolation Forest
-Machine learning model used to detect rare patterns in KPI behavior.
+---
 
-Combining statistical and ML detectors improves reliability and reduces false positives.
+### Risk Classification
 
-Risk Classification
-Detected anomalies are categorized into severity levels.
+- LOW
+- MEDIUM
+- HIGH
 
-Risk levels
+Used to prioritize incidents and reduce alert noise.
 
-• LOW • MEDIUM • HIGH
+---
 
-This prioritizes investigation and reduces alert noise.
+### Root Cause Attribution
 
-Root Cause Attribution
-When anomalies occur, the system analyzes dimensional breakdowns to identify likely drivers.
+Analyzes KPI changes across business dimensions:
 
-Example dimensions analyzed
+- Customer state
+- Product category
+- Payment method
+- Order segment
 
-• customer state • product category • payment method • order segment
+Helps identify why an anomaly occurred, not just that it occurred.
 
-This helps analysts understand why a KPI shifted, not just that it changed.
+---
 
-Alert Orchestration Layer
-The alert orchestration system converts anomaly signals into operational notifications.
+### Alert Orchestration Layer
 
-Key functions
+Converts anomaly signals into actionable alerts.
 
-• severity filtering • detector confirmation validation • alert suppression to reduce noise • incident prioritization • Slack-style notification generation
+Functions:
+- Severity filtering
+- Alert validation
+- Noise reduction
+- Incident prioritization
+- Notification generation (Slack-style format)
 
-Example Alert
-🔴 HIGH ALERT — Revenue KPI Anomaly
+---
 
-Date: 2018-07-07
-Observed Value: $11,023
-Baseline: $33,631
-Z-Score: -1.96
+## Example Alert
 
-Root Cause Signals
-• customer_state: SP
-• product_category: relogios_presentes
-This simulates how monitoring platforms notify analytics teams of operational incidents.
+HIGH ALERT — Revenue KPI Anomaly
 
-Technology Stack
-Core Processing
-• Python • DuckDB (analytical warehouse) • Pandas / NumPy (data processing)
+Date: 2018-07-07  
+Observed Value: $11,023  
+Baseline: $33,631  
+Z-Score: -1.96  
 
-Machine Learning & Statistics
-• Scikit-learn (Isolation Forest) • SciPy (statistical detection)
+Root Cause Signals:
+- customer_state: SP
+- product_category: relogios_presentes
 
-Configuration & Utilities
-• PyYAML • python-dateutil
+---
 
-git clone https://github.com/yourusername/enterprise-kpi-monitoring
-Install dependencies
+## Tech Stack
 
-pip install -r requirements.txt
-Run the KPI pipeline
+Python, DuckDB, Pandas, NumPy  
+Scikit-learn, SciPy  
+PyYAML, python-dateutil  
 
-python run_pipeline.py
-Generate anomaly alerts
+---
 
-python run_alerts.py
-Load the Power BI dashboard using:
+## How to Run
 
-outputs/kpi_daily.csv
-outputs/alerts.csv
-Example Alert Output
-The alert orchestration system generates operational notifications in:
+git clone https://github.com/yourusername/enterprise-kpi-monitoring  
+cd enterprise-kpi-monitoring  
+pip install -r requirements.txt  
 
-outputs/slack_notifications.csv
-These alerts simulate how monitoring systems notify analysts of KPI anomalies.
+Run pipeline:
+python run_pipeline.py  
 
-Skills Demonstrated
-Data pipeline architecture Statistical anomaly detection Machine learning anomaly models Root cause attribution analysis Monitoring dashboard design Operational alert orchestration Analytics system architecture
+Generate alerts:
+python run_alerts.py  
 
-Future Improvements
-Real-time streaming ingestion Slack webhook integration Model drift monitoring Automated incident reports Streaming anomaly detection
+---
 
-What Makes This Project Valuable
-This platform integrates anomaly detection, root cause analysis, monitoring dashboards, and alert orchestration to simulate a production KPI monitoring workflow.
+## Outputs
 
-It demonstrates how analytics systems evolve beyond dashboards into operational monitoring platforms used to track business health in real time.
+- outputs/kpi_daily.csv
+- outputs/alerts.csv
+- outputs/slack_notifications.csv
 
-Anomaly Investigation Console
-• incident log • anomaly severity gauge • root cause signals • KPI anomaly breakdown
+---
+
+## Skills Demonstrated
+
+- Data pipeline development
+- KPI monitoring systems
+- Anomaly detection (statistical + ML)
+- Root cause analysis
+- Alert orchestration
+- Business intelligence systems
+- Dashboard design (Power BI)
+- End-to-end analytics architecture
+
+---
+
+## Future Improvements
+
+- Real-time streaming ingestion
+- Slack webhook integration
+- Model drift monitoring
+- Automated incident reporting
+- Live anomaly detection
+
+---
+
+## Project Value
+
+This project demonstrates how modern analytics systems evolve beyond dashboards into full operational monitoring platforms that combine:
+
+- anomaly detection
+- root cause analysis
+- alerting systems
+- business KPI monitoring
+
+It simulates real-world enterprise systems used to monitor business health and respond to incidents in real time.
