@@ -119,47 +119,6 @@ Machine Learning & Statistics
 Configuration & Utilities
 • PyYAML • python-dateutil
 
-Visualization
-• Power BI Monitoring Console
-Project Structure
-enterprise-kpi-monitoring
-│
-├── data
-│   ├── raw/olist                 # Kaggle dataset
-│   └── warehouse.duckdb
-│
-├── sql
-│   ├── 00_create_staging.sql
-│   └── 10_kpi_daily.sql
-│
-├── src
-│   ├── config.py
-│   ├── io_duckdb.py
-│   ├── data_validation.py
-│   ├── kpi_builder.py
-│   ├── anomaly_injection.py
-│   ├── baseline_engine.py
-│   ├── anomaly_engine.py
-│   ├── risk_engine.py
-│   ├── root_cause_engine.py
-│   ├── alert_orchestrator.py
-│   ├── slack_formatter.py
-│   └── pipeline.py
-│
-├── outputs
-│   ├── kpi_daily.csv
-│   ├── data_quality_report.csv
-│   └── alerts.csv
-│
-├── run_pipeline.py
-├── run_alerts.py
-│
-├── config.yaml
-├── requirements.txt
-└── README.md
-How to Run the Project
-Clone the repository
-
 git clone https://github.com/yourusername/enterprise-kpi-monitoring
 Install dependencies
 
