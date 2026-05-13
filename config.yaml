@@ -1,0 +1,55 @@
+warehouse_path: "data/warehouse.duckdb"
+raw_dir: "data/raw/olist"
+outputs_dir: "outputs"
+
+kpis:
+  - revenue
+  - orders
+  - aov
+  - payment_fail_rate
+
+baseline:
+  rolling_mean_days: 7
+  rolling_std_days: 7
+  baseline_days: 30
+  min_days_for_detection: 35
+
+anomaly_detection:
+  heuristic_pct_dev: 0.20
+  zscore_threshold: 2.5
+  iqr_k: 1.5
+  isolation_forest:
+    enabled: true
+    contamination: 0.03
+    n_estimators: 300
+    random_state: 42
+
+risk:
+  z_low: 2.0
+  z_medium: 2.5
+  z_high: 3.5
+  revenue_drop_escalate_pct: 0.30
+
+root_cause:
+  dimensions:
+    - customer_state
+    - product_category_name
+    - payment_type
+  top_n: 5
+  lookback_days: 30
+
+anomaly_injection:
+  enabled: true
+  seed: 42
+  # Inject anomalies into daily KPI series so you can test detection deterministically
+  events:
+    - kpi: revenue
+      start_date: "2018-06-01"
+      days: 2
+      multiplier: 0.60     # 40% drop
+      label: "Revenue shock (simulated outage)"
+    - kpi: orders
+      start_date: "2018-03-20"
+      days: 3
+      multiplier: 1.35     # 35% spike
+      label: "Orders spike (simulated promo)"
