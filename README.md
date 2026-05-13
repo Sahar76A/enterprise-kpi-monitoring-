@@ -146,21 +146,6 @@ Python, DuckDB, Pandas, NumPy
 Scikit-learn, SciPy  
 PyYAML, python-dateutil  
 
----
-
-## How to Run
-
-git clone https://github.com/yourusername/enterprise-kpi-monitoring  
-cd enterprise-kpi-monitoring  
-pip install -r requirements.txt  
-
-Run pipeline:
-python run_pipeline.py  
-
-Generate alerts:
-python run_alerts.py  
-
----
 
 ## Outputs
 
