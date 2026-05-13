@@ -1,4 +1,4 @@
-# enterprise-kpi-monitoring-
+
 # Enterprise KPI Monitoring Platform
 
 A production-style Enterprise KPI Monitoring Platform designed to detect abnormal behavior in operational business metrics, identify root causes, classify incident severity, and generate alerts for investigation.
